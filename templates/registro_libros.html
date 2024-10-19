@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Libros</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        table {
+            width: 50%;
+            margin: auto;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #2196F3; /* Color azul */
+            color: white;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        input[type="radio"] {
+            margin-right: 5px;
+        }
+        button {
+            background-color: #2196F3; /* Color azul */
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #1976D2; /* Azul más oscuro al pasar el ratón */
+        }
+        .form-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .form-row label {
+            flex: 1;
+            margin: 0;
+        }
+        .form-row input, .form-row textarea {
+            flex: 2;
+        }
+        .medio-row {
+            display: flex;
+            align-items: center;
+            justify-content: center; /* Centrar las opciones de medio */
+        }
+        .medio-row label {
+            margin-right: 10px; /* Espacio entre etiquetas de radio */
+        }
+        .submit-row {
+            text-align: center; /* Centrar el botón */
+            margin-top: 20px; /* Espacio superior para separar de las opciones de medio */
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;">Registro de Libros</h1>
+    <table>
+        <tr>
+            <td>
+                <form method="POST">
+                    <div class="form-row">
+                        <label for="titulo">Título:</label>
+                        <input type="text" id="titulo" name="titulo" required>
+                    </div>
+
+                    <div class="form-row">
+                        <label for="autor">Autor:</label>
+                        <input type="text" id="autor" name="autor" required>
+                    </div>
+
+                    <div class="form-row">
+                        <label for="resumen">Resumen:</label>
+                        <textarea id="resumen" name="resumen" rows="4"></textarea>
+                    </div>
+
+                    <div class="medio-row">
+                        <label>Medio:</label>
+                        <input type="radio" id="fisico" name="medio" value="Físico" required>
+                        <label for="fisico">Físico</label>
+                        <input type="radio" id="magnetico" name="medio" value="Magnético" required>
+                        <label for="magnetico">Magnético</label>
+                    </div>
+
+                    <div style="text-align: center; margin-top: 20px;">
+                        <button type="submit">Enviar</button>
+                    </div>
+                </form>
+            </td>
+        </tr>
+    </table>
+
+    <center><h2>Libros Registrados</h2> </center>
+    <table>
+        <tr>
+            <th>Título</th>
+            <th>Autor</th>
+            <th>Resumen</th>
+            <th>Medio</th>
+        </tr>
+        {% for libro in libros %}
+        <tr>
+            <td>{{ libro.titulo }}</td>
+            <td>{{ libro.autor }}</td>
+            <td>{{ libro.resumen }}</td>
+            <td>{{ libro.medio }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <div style="text-align: center; margin-top: 20px;">
+        <a href="{{ url_for('index') }}">
+            <button type="button">Regresar al Menú</button>
+        </a>
+    </div>
+</body>
+</html>
